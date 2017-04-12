@@ -1,8 +1,10 @@
 ## Keras imports
-from keras.models import Sequential
-from keras.layers import Dense, Dropout, Flatten
-from keras.layers import Convolution2D, MaxPool2D
+from keras.models import Sequential, Model, load_model
+from keras.layers import Dense, Dropout, Flatten, Reshape
+from keras.layers import Convolution2D, MaxPool2D, UpSampling2D
 from keras.optimizers import SGD
 from keras.utils import plot_model
 from keras.regularizers import L1L2
+from pygpu.gpuarray import GpuArrayException
+from keras import backend as K
 

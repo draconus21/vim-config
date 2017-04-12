@@ -15,8 +15,8 @@ let nerdtreeignore = ['\.pyc$', 'build', 'venv', 'egg', 'egg-info/', 'dist', 'do
 "  }}}
 
 " PYTHON SYNTAX: {{{
-Plugin 'vim-scripts/Pydiction'
-let g:pydiction_location='/home/neeth/.vim/bundle/Pydiction/complete-dict'
+"Plugin 'vim-scripts/Pydiction'
+"let g:pydiction_location='/home/neeth/.vim/bundle/Pydiction/complete-dict'
 
 Plugin 'vim-scripts/indentpython.vim'
 Plugin 'scrooloose/syntastic'
@@ -115,15 +115,17 @@ let g:netrw_liststyle=3       " tree view
 " |  don't invoke other mappings
 " normal mode
 
+" B
 " <esc> in insert mode is now jk
 inoremap jk <esc>
 
 nnoremap ,u :GundoToggle<CR>
 
-nnoremap ,pyb :-1read /home/neeth/.vim/.skeleton.import.basic<CR>7ja
-nnoremap ,pya :-1read /home/neeth/.vim/.skeleton.import.basic<CR>7j:read /home/neeth/.vim/.skeleton.import.airy<CR>4ja
-nnoremap ,pyt :-1read /home/neeth/.vim/.skeleton.import.basic<CR>7j:read /home/neeth/.vim/.skeleton.import.theano<CR>6ja
-nnoremap ,pyk :-1read /home/neeth/.vim/.skeleton.import.basic<CR>7j:read /home/neeth/.vim/.skeleton.import.keras<CR>7ja
+nnoremap ,pyb :-1read /home/neeth/.vim/.skeleton.import.basic<CR>8ja
+nnoremap ,pya :-1read /home/neeth/.vim/.skeleton.import.basic<CR>8j:read /home/neeth/.vim/.skeleton.import.airy<CR>4ja
+nnoremap ,pyt :-1read /home/neeth/.vim/.skeleton.import.basic<CR>8j:read /home/neeth/.vim/.skeleton.import.theano<CR>7ja
+nnoremap ,pyk :-1read /home/neeth/.vim/.skeleton.import.basic<CR>8j:read /home/neeth/.vim/.skeleton.import.keras<CR>9ja
+
 " }}}
 
 " SPACES AND TABS: {{{

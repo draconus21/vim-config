@@ -121,6 +121,7 @@ let g:netrw_liststyle=3       " tree view
 " B
 " <esc> in insert mode is now jk
 inoremap jk <esc>
+inoremap <esc> <NOP>
 
 nnoremap ,u :GundoToggle<CR>
 
@@ -132,6 +133,18 @@ nnoremap ,pyk :-1read /home/neeth/.vim/.skeleton.import.basic<CR>8j:read /home/n
 " enable consequtive indenting with > or <
 vnoremap < <gv
 vnoremap > >gv
+
+" disable arrow keys
+" get into the habit of using kjhl instead
+noremap <Up> <NOP>
+noremap <Down> <NOP>
+noremap <Left> <NOP>
+noremap <Right> <NOP>
+noremap <c-Up> <NOP>
+noremap <c-Down> <NOP>
+noremap <c-Left> <NOP>
+noremap <c-Right> <NOP>
+
 " COMP322 A2
 " rename student main
 " nnoremap <space><space><space><space> :/int\ main()<CR>^lllllllli2<esc>:wq<CR>
@@ -170,7 +183,7 @@ set incsearch   " search as characters are entered
 set hlsearch    " highlight matches
 
 " turn off highlighting
-nnoremap <esc><esc> :nohlsearch<CR>
+nnoremap <space>n :nohlsearch<CR>
 " }}}
 
 " MOVEMENT: {{{
@@ -200,6 +213,11 @@ let g:badwolf_html_link_underline = 1	" Turn on HTML link underlining
 let g:badwolf_css_props_highlight = 1	" Turn on CSS properties highlighting
 
 " }}}
+
+" PYTHON:{{{
+nnoremap [r :w<CR>:!python %<CR> 
+" }}}
+
 " VIM CONFIG:
 " config for this file
 " configs are placed in comments

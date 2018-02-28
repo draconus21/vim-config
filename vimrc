@@ -17,12 +17,14 @@ let nerdtreeignore = ['\.pyc$', 'build', 'venv', 'egg', 'egg-info/', 'dist', 'do
 " Better WhiteSpace: {{{
 Plugin 'ntpeters/vim-better-whitespace'
 " }}}
-" PYTHON SYNTAX: {{{
+
+" CODE SYNTAX: {{{
 "Plugin 'vim-scripts/Pydiction'
 "let g:pydiction_location='/home/neeth/.vim/bundle/Pydiction/complete-dict'
 
 Plugin 'vim-scripts/indentpython.vim'
-Plugin 'scrooloose/syntastic'
+" Plugin 'scrooloose/syntastic'
+let g:syntastic_cpp_compiler_options = ' -std=c++11'
 " }}}
 
 " POWERLINE: {{{
@@ -54,6 +56,39 @@ set laststatus=2
 Plugin 'Gundo'
 " }}}
 
+" RANGER:{{{
+" File explorer
+Plugin 'francoiscabrol/ranger.vim'
+"}}}
+
+" OmniSharp: {{{
+" C# completion
+" Plugin 'Omnisharp/omnisharp-vim'
+" }}}
+
+" JEDI-VIM: {{{
+" python autocomplete
+" Plugin 'davidhalter/jedi-vim'
+" let g:jedi#popup_on_dot = 0
+" }}}
+
+" YouCompleteMe: {{{
+" autocomplete
+" Plugin 'Valloric/YouCompleteMe'
+"}}}
+
+" Conque-GDB: {{{
+ Plugin 'git://github.com/vim-scripts/Conque-GDB.git'
+" }}}
+
+" Tmux-focus-events: {{{
+ Plugin 'tmux-plugins/vim-tmux-focus-events'
+" }}}
+
+" autotag: {{{
+ Plugin 'craigemery/vim-autotag'
+" }}}
+
 call vundle#end()
 " }}}
 
@@ -66,6 +101,20 @@ set encoding=utf-8
 " search down into subfolders
 " Provide tab-completion for all file related tasks
 set path+=**
+
+" NERDTREE:{{{
+"
+" open NERDTree for directories
+autocmd StdinReadPre * let s:std_in=1
+autocmd VimEnter * if argc() == 1 && isdirectory(argv()[0]) && !exists("s:std_in") | exe 'NERDTree' argv()[0] | wincmd p | ene | endif
+"
+" NERDTree Toggle
+map <C-n> :NERDTreeToggle<CR>
+" Commands
+" o : open file
+" i : open in hsplit
+" s : open in vsplit
+" }}}
 
 " TAG JUMPING:{{{
 " create the `tags` file (may need to install ctags first)
@@ -84,6 +133,7 @@ command! MakeTags !ctags -R .
 " ^x^f for filenames (works for path+=**)
 " ^x^] for tags only
 " ^xs  spelling suggestion
+
 " }}}
 
 " FOLDING: {{{
@@ -158,6 +208,9 @@ set expandtab       " expand tabs to spaces
 set autoindent
 highlight BadWhiteSpace ctermbg=red guibg=red
 filetype indent on  " indent based on ~/.vim/indent and filetype
+" ntpeters/vim-better-whitespace
+autocmd FileType cpp autocmd BufEnter <buffer> EnableStripWhitespaceOnSave
+autocmd FileType c autocmd BufEnter <buffer> EnableStripWhitespaceOnSave
 autocmd FileType python autocmd BufEnter <buffer> EnableStripWhitespaceOnSave
 " }}}
 
@@ -215,7 +268,21 @@ let g:badwolf_css_props_highlight = 1	" Turn on CSS properties highlighting
 " }}}
 
 " PYTHON:{{{
-nnoremap [r :w<CR>:!python %<CR> 
+nnoremap [r :w<CR>:!python %<CR>
+" }}}
+
+" AUTORELOAD CHANGED FILES: {{{
+" autoreload triggered when changing bufferes when inside vim
+ set autoread
+ au FocusGained,BufEnter * :checktime
+" }}}
+
+" AUTORELOAD VIMRC:{{{
+" no need to restart vim everytime vimrc is changed
+ augroup myvimrc
+     au!
+     au BufWritePost .vimrc,_vimrc,vimrc,.gvimrc,_gvimrc,gvimrc so $MYVIMRC | if has('gui_running') | so $MYVIMRC | endif
+ augroup END
 " }}}
 
 " VIM CONFIG:

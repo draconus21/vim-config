@@ -255,6 +255,7 @@ nnoremap <C-l> <C-w><C-l>
 " }}}
 
 " COLORS: {{{
+set t_Co=256
 " colorscheme molokai
 " let g:molokai_original=1
 colorscheme badwolf

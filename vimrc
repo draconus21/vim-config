@@ -89,6 +89,10 @@ Plugin 'francoiscabrol/ranger.vim'
  Plugin 'craigemery/vim-autotag'
 " }}}
 
+" LaTeX: {{{
+ Plugin 'lervag/vimtex'
+" }}}
+
 call vundle#end()
 " }}}
 
@@ -119,6 +123,11 @@ map <C-n> :NERDTreeToggle<CR>
 " TAG JUMPING:{{{
 " create the `tags` file (may need to install ctags first)
 command! MakeTags !ctags -R .
+command! LinkAiryLibs set tags+=/home/neeth/airy/gitlab/airy-libs/tags
+command! LinkSimLibs set tags+=/home/neeth/airy/gitlab/sim_fft/tags
+
+autocmd FileType python silent MakeTags
+autocmd FileType python silent LinkAiryLibs
 
 " ^] jump to tag
 " g^] list files that have the tag
@@ -170,7 +179,7 @@ let g:netrw_liststyle=3       " tree view
 
 " B
 " <esc> in insert mode is now jk
-inoremap jk <esc>
+inoremap jj <esc>
 inoremap <esc> <NOP>
 
 nnoremap ,u :GundoToggle<CR>
@@ -195,9 +204,7 @@ noremap <c-Down> <NOP>
 noremap <c-Left> <NOP>
 noremap <c-Right> <NOP>
 
-" COMP322 A2
-" rename student main
-" nnoremap <space><space><space><space> :/int\ main()<CR>^lllllllli2<esc>:wq<CR>
+"nnoremap print Eldli(<esc>$a)<esc>
 " }}}
 
 " SPACES AND TABS: {{{
@@ -255,6 +262,7 @@ nnoremap <C-l> <C-w><C-l>
 " }}}
 
 " COLORS: {{{
+" set background=dark
 set t_Co=256
 " colorscheme molokai
 " let g:molokai_original=1
@@ -290,5 +298,5 @@ nnoremap [r :w<CR>:!python %<CR>
 " config for this file
 " configs are placed in comments
 set modelines=2
-" vim: foldmethod=marker
-" vim: foldlevel=0
+set foldmethod=marker
+set foldlevel=-1

@@ -11,7 +11,7 @@ Plugin 'VundleVim/Vundle.vim'
 
 " NERDTREE: {{{
 Plugin 'scrooloose/nerdtree'
-let nerdtreeignore = ['\.pyc$', 'build', 'venv', 'egg', 'egg-info/', 'dist', 'docs']
+let NERDTreeIgnore = ['\.pyc$', 'build', 'venv', 'egg', 'egg-info/', 'dist', 'docs', '\.pb$', '\.pbtxt$', '\.bin$', '\.raw$']
 "  }}}
 
 " Better WhiteSpace: {{{
@@ -120,14 +120,22 @@ map <C-n> :NERDTreeToggle<CR>
 " s : open in vsplit
 " }}}
 
+" RANGER: {{{
+" let g:NERDTreeHijackNetrw = 0
+" let g:ranger_replace_netrw = 1
+" }}}
+
 " TAG JUMPING:{{{
 " create the `tags` file (may need to install ctags first)
-command! MakeTags !ctags -R .
-command! LinkAiryLibs set tags+=/home/neeth/airy/gitlab/airy-libs/tags
-command! LinkSimLibs set tags+=/home/neeth/airy/gitlab/sim_fft/tags
+command! MakeTags !ctags -R --exclude=.git --exclude=third_parties --exclude=resources
+"--exclude=.pbtxt  --exlude=.pb
+"command! LinkAiryLibs set tags+=/home/neeth/airy/gitlab/airy-libs/tags
+"command! LinkSimLibs set tags+=/home/neeth/airy/gitlab/sim_fft/tags
 
 autocmd FileType python silent MakeTags
-autocmd FileType python silent LinkAiryLibs
+autocmd FileType c silent MakeTags
+autocmd FileType cpp silent MakeTags
+"autocmd FileType python silent LinkAiryLibs
 
 " ^] jump to tag
 " g^] list files that have the tag
@@ -147,11 +155,15 @@ autocmd FileType python silent LinkAiryLibs
 
 " FOLDING: {{{
 " set foldenable
-set foldlevelstart=10   " open most folds by default
+set foldlevelstart=0    " close all folds by default
 set foldnestmax=10      " max of 10 nested folds
 set foldmethod=indent   " fold based on indent level
 
 nnoremap <space> za
+
+autocmd FileType cpp set foldmarker={,}
+autocmd FileType c set foldmarker={,}
+
 
 " }}}
 
@@ -216,13 +228,15 @@ set autoindent
 highlight BadWhiteSpace ctermbg=red guibg=red
 filetype indent on  " indent based on ~/.vim/indent and filetype
 " ntpeters/vim-better-whitespace
-autocmd FileType cpp autocmd BufEnter <buffer> EnableStripWhitespaceOnSave
-autocmd FileType c autocmd BufEnter <buffer> EnableStripWhitespaceOnSave
-autocmd FileType python autocmd BufEnter <buffer> EnableStripWhitespaceOnSave
+let g:strip_whitespace_confirm=0
+autocmd FileType c,cpp,python  autocmd BufEnter <buffer> EnableStripWhitespaceOnSave
 " }}}
 
 " UI CONFIG:{{{
 set wildmenu    " Display all matching files when we tab complete
+" do not search for autocomplete in included files
+" super super slow!
+setglobal complete-=i
 set number
 set cursorline  " highlight/underline current line
 set showmatch   " highlight matching brackets
@@ -278,6 +292,14 @@ let g:badwolf_css_props_highlight = 1	" Turn on CSS properties highlighting
 
 " PYTHON:{{{
 nnoremap [r :w<CR>:!python %<CR>
+" }}}
+
+" VIMLATEX: {{{
+let g:tex_flavor='latex'
+" }}}
+
+" VIMSPECTOR: {{{
+"let g:vimspector_enable_mappings = 'HUMAN'
 " }}}
 
 " AUTORELOAD CHANGED FILES: {{{

@@ -60,9 +60,12 @@ Plugin 'tpope/vim-surround'
 
 " Better WhiteSpace: {{{
 Plugin 'ntpeters/vim-better-whitespace'
-let g:strip_whitespace_confirm = 0
+let g:strip_whitespace_confirm=0
+let g:show_spaces_that_precede_tabs=1
+let g:strio_only_modified_lines=1
 highlight BadWhiteSpace ctermbg=red guibg=red
-autocmd FileType c,cpp,python  autocmd BufEnter <buffer> EnableStripWhitespaceOnSave
+autocmd FileType c,cpp,python EnableStripWhitespaceOnSave
+
 " }}}
 
 " CODE SYNTAX: {{{

@@ -22,7 +22,7 @@ let g:badwolf_css_props_highlight = 1	" Turn on CSS properties highlighting
 Plugin 'scrooloose/nerdtree'
 Plugin 'xuyuanp/nerdtree-git-plugin'
 
-let NERDTreeIgnore = ['\.pyc$', 'CmakeBuild', 'build', 'venv', 'egg', 'egg-info', 'dist', '\.pb$', '\.pbtxt$', '\.bin$', '\.raw$']
+let NERDTreeIgnore = ['\.pyc$', 'CmakeBuild', 'build', 'venv', 'egg', 'egg-info', 'dist', '\.pb$', '\.pbtxt$', '\.bin$', '\.raw$', '__pycache__']
 
 " clone NERDTree on exit (to ensure that vim-workspace can save and load sessions properly'
 autocmd VimLeave * NERDTreeClose
@@ -314,5 +314,6 @@ endif
 " config for this file
 " configs are placed in comments
 set modelines=2
+set foldmarker={{{,}}}
 set foldmethod=marker
 set foldlevel=0

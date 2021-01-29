@@ -22,7 +22,7 @@ let g:badwolf_css_props_highlight = 1	" Turn on CSS properties highlighting
 Plugin 'scrooloose/nerdtree'
 Plugin 'xuyuanp/nerdtree-git-plugin'
 
-let NERDTreeIgnore = ['\.pyc$', 'CmakeBuild', 'build', 'venv', 'egg', 'egg-info', 'dist', '\.pb$', '\.pbtxt$', '\.bin$', '\.raw$', '__pycache__']
+let NERDTreeIgnore = ['\.pyc$', 'CmakeBuild', 'venv', 'egg', 'egg-info', 'dist', '\.pb$', '\.pbtxt$', '\.bin$', '\.raw$', '__pycache__']
 
 " clone NERDTree on exit (to ensure that vim-workspace can save and load sessions properly'
 autocmd VimLeave * NERDTreeClose
@@ -38,7 +38,7 @@ autocmd VimEnter * if argc() == 1 && isdirectory(argv()[0]) && !exists('s:std_in
 " https://github.com/preservim/nerdtree/issues/911
 let g:NERDTreeNodeDelimiter = "\u00a0"
 
-let g:NERDTreeWinSize = 30
+let g:NERDTreeWinSize = 35
 
 " NERDTree Toggle
 map <C-n> :NERDTreeToggle<CR>
@@ -69,7 +69,11 @@ autocmd FileType c,cpp,python EnableStripWhitespaceOnSave
 " }}}
 
 " CODE SYNTAX: {{{
-Plugin 'vim-scripts/indentpython.vim'
+set background=dark
+
+Plugin 'psf/black'
+" run eBlack on save
+autocmd BufWritePre *.py execute ':Black'
 " }}}
 
 " POWERLINE: {{{
@@ -231,6 +235,11 @@ inoremap <esc> <NOP>
 vnoremap < <gv
 vnoremap > >gv
 
+command SpaceToTab :set tabstop=4 shiftwidth=4 expandtab | :retab%! | :set list
+command TabToSpace :set tabstop=4 noexpandtab | :%retab! | :set tabstop=2 shiftwidth=2
+command FixTabs :SpaceToTab | :TabToSpace
+"command Fixtabs :set expandtab | :set tabstop=4 | :set noexpandtab | :%retab! | set tabstop=2
+
 " MOVEMENT: {{{
 " move vertically without skipping single line broken
 " as mutliple lines
@@ -246,17 +255,19 @@ nnoremap <C-j> <C-w><C-j>
 nnoremap <C-k> <C-w><C-k>
 nnoremap <C-h> <C-w><C-h>
 nnoremap <C-l> <C-w><C-l>
+
+" tab navigation
+nnoremap tN  :tabnew<CR>
+nnoremap th  :tabfirst<CR>
+nnoremap tk  :tabnext<CR>
+nnoremap tj  :tabprev<CR>
+nnoremap tl  :tablast<CR>
+nnoremap tt  :tabedit<Space>
+nnoremap tn  :tabnext<Space>
+nnoremap tm  :tabm<Space>
+nnoremap td  :tabclose<CR>
 " }}}
 
-" }}}
-
-" SPACES AND TABS: {{{
-set shiftwidth=2    " number of spaces for >> or <<
-set tabstop=2       " number of spaces inserted when viewing <space>
-set softtabstop=2   " number of spaces inserted when <space> is pressed
-set expandtab       " expand tabs to spaces
-set autoindent
-filetype indent on  " indent based on ~/.vim/indent and filetype
 " }}}
 
 " UI CONFIG:{{{
@@ -268,8 +279,8 @@ set number
 set cursorline  " highlight/underline current line
 set showmatch   " highlight matching brackets
 set lazyredraw  " redraw only when we need to
-set tw=99       " width of document
-set colorcolumn=100
+"set tw=99       " width of document
+set colorcolumn=107
 
 set backspace=indent,eol,start
 set splitbelow
@@ -311,6 +322,18 @@ if has("gui_running")
   " Maximize gvim window (for an alternative on Windows, see simalt below).
   set lines=999 columns=999
 endif
+" }}}
+
+" SPACES AND TABS: {{{
+set shiftwidth=2    " number of spaces for >> or <<
+set tabstop=2       " number of spaces inserted when viewing <space>
+set softtabstop=2   " number of spaces inserted when <space> is pressed
+set expandtab       " expand tabs to spaces
+set autoindent
+
+" display tabs as >-
+set list
+set listchars=tab:>-
 " }}}
 
 " VIM CONFIG:

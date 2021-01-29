@@ -73,7 +73,7 @@ set background=dark
 
 Plugin 'psf/black'
 " run eBlack on save
-autocmd BufWritePre *.py execute ':Black'
+autocmd BufWritePre *.py execute 'silent :Black'
 " }}}
 
 " POWERLINE: {{{

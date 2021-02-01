@@ -19,7 +19,7 @@ let g:badwolf_css_props_highlight = 1	" Turn on CSS properties highlighting
 " }}}
 
 " NERDTREE: {{{
-Plugin 'scrooloose/nerdtree'
+Plugin 'preservim/nerdtree'
 Plugin 'xuyuanp/nerdtree-git-plugin'
 
 let NERDTreeIgnore = ['\.pyc$', 'CmakeBuild', 'venv', 'egg', 'egg-info', 'dist', '\.pb$', '\.pbtxt$', '\.bin$', '\.raw$', '__pycache__']

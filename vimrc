@@ -41,7 +41,9 @@ let g:NERDTreeNodeDelimiter = "\u00a0"
 let g:NERDTreeWinSize = 35
 
 " NERDTree Toggle
-map <C-n> :NERDTreeToggle<CR>
+" close if open, else open nerdtree to current file
+nnoremap <expr> <C-n> g:NERDTree.IsOpen() ? ':NERDTreeClose<CR>' : @% == '' ? ':NERDTree<CR>' : ':NERDTreeFind<CR>'
+
 " Commands
 " o : open file
 " i : open in hsplit
@@ -64,7 +66,7 @@ let g:strip_whitespace_confirm=0
 let g:show_spaces_that_precede_tabs=1
 let g:strio_only_modified_lines=1
 highlight BadWhiteSpace ctermbg=red guibg=red
-autocmd FileType c,cpp,python EnableStripWhitespaceOnSave
+autocmd FileType c,cpp,python,rst,sh EnableStripWhitespaceOnSave
 
 " }}}
 
@@ -72,8 +74,8 @@ autocmd FileType c,cpp,python EnableStripWhitespaceOnSave
 set background=dark
 
 Plugin 'psf/black'
-" run eBlack on save
-autocmd BufWritePre *.py execute 'silent :Black'
+" run Black on save
+autocmd BufWritePre *.py execute ':Black'
 " }}}
 
 " POWERLINE: {{{
@@ -118,7 +120,8 @@ let g:gutentags_ctags_exclude = [
   \ 'compiled',
   \ 'docs',
   \ 'examples',
-  \ 'budnle',
+  \ 'bundle',
+  \ '*.sh',
   \ '*.md',
   \ '*-lock.json',
   \ '*.lock',
@@ -173,6 +176,7 @@ call vundle#end()
 " enable syntax
 syntax enable
 filetype plugin on
+filetype plugin indent on
 set encoding=utf-8
 " set spell spelllang=en
 
@@ -235,10 +239,9 @@ inoremap <esc> <NOP>
 vnoremap < <gv
 vnoremap > >gv
 
-command SpaceToTab :set tabstop=4 shiftwidth=4 expandtab | :retab%! | :set list
-command TabToSpace :set tabstop=4 noexpandtab | :%retab! | :set tabstop=2 shiftwidth=2
-command FixTabs :SpaceToTab | :TabToSpace
-"command Fixtabs :set expandtab | :set tabstop=4 | :set noexpandtab | :%retab! | set tabstop=2
+command TabToSpace :set tabstop=4 shiftwidth=4 expandtab <bar> :%retab! <bar> :set list
+command SpaceToTab :set tabstop=4 noexpandtab <bar> :%retab! <bar> :set tabstop=4 shiftwidth=4
+command FixTabs :SpaceToTab <bar> :TabToSpace
 
 " MOVEMENT: {{{
 " move vertically without skipping single line broken
@@ -285,6 +288,7 @@ set colorcolumn=107
 set backspace=indent,eol,start
 set splitbelow
 set splitright
+set relativenumber
 set number
 " }}}
 
@@ -333,7 +337,9 @@ set autoindent
 
 " display tabs as >-
 set list
-set listchars=tab:>-
+set listchars=tab:>-,trail:.
+
+command ShowTabs :set list | :set listchars=tab:>-
 " }}}
 
 " VIM CONFIG:

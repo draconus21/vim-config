@@ -18,6 +18,18 @@ let g:badwolf_html_link_underline = 1	" Turn on HTML link underlining
 let g:badwolf_css_props_highlight = 1	" Turn on CSS properties highlighting
 " }}}
 
+" Fuzzy Finder: {{{
+" <c-p> open fuzzy finder in curdir
+" <c-f>, <c-b> cycle between modes (files, buffer, MostRecentlyUsed, mixed)
+" <c-r> switch to regex mode
+" <c-j><c-k> or arrow keys to navigate result list
+" <c-t>, <c-v>, <c-x> open in tab, v-split, h-split
+" <c-n>, <c-p> see next/previous prompt history
+" <c-z> mark/unmark multiple files to open
+
+Plugin 'ctrlpvim/ctrlp.vim'
+" }}}
+
 " NERDTREE: {{{
 Plugin 'preservim/nerdtree'
 Plugin 'xuyuanp/nerdtree-git-plugin'

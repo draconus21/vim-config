@@ -26,6 +26,9 @@ let NERDTreeIgnore = ['\.pyc$', 'CmakeBuild', 'venv', 'egg', 'egg-info', 'dist',
 
 " clone NERDTree on exit (to ensure that vim-workspace can save and load sessions properly'
 autocmd VimLeave * NERDTreeClose
+if !has("gui_running") " skip save session when using gvim
+  autocmd VimLeave * mksession
+endif
 
 " open NERDTree for directories
 autocmd StdinReadPre * let s:std_in = 1
@@ -66,7 +69,7 @@ let g:strip_whitespace_confirm=0
 let g:show_spaces_that_precede_tabs=1
 let g:strio_only_modified_lines=1
 highlight BadWhiteSpace ctermbg=red guibg=red
-autocmd FileType c,cpp,python,rst,sh EnableStripWhitespaceOnSave
+autocmd FileType json,c,cpp,python,rst,sh EnableStripWhitespaceOnSave
 
 " }}}
 
@@ -216,8 +219,8 @@ set foldmethod=indent   " fold based on indent level
 
 nnoremap <space> za
 
-autocmd FileType cpp set foldmarker={,}
-autocmd FileType c set foldmarker={,}
+autocmd FileType json,c,cpp set foldmarker={,}
+autocmd Filetype json setlocal foldlevel=99 " open all folds by default for json
 
 
 " }}}
@@ -288,7 +291,7 @@ set colorcolumn=107
 set backspace=indent,eol,start
 set splitbelow
 set splitright
-set relativenumber
+"set relativenumber
 set number
 " }}}
 

@@ -4,6 +4,7 @@ set nocompatible
 filetype off
 set rtp+=~/.vim/bundle/Vundle.vim
 
+let mapleader=','
 " VUNDLE AND PLUGINS: {{{
 call vundle#begin()
 
@@ -16,6 +17,18 @@ let g:badwolf_tabline = 0		  " tabline (in console, at the top, contains various
                               " lighter than bg
 let g:badwolf_html_link_underline = 1	" Turn on HTML link underlining
 let g:badwolf_css_props_highlight = 1	" Turn on CSS properties highlighting
+" }}}
+
+" Window Swap: {{{
+" 1. Navigate to the window you'd like to move
+" 2. Press <leader>ww
+" 3. Navigate to the window you'd like to swap with
+" 4. Press <leader>ww again"
+
+" to change default bindings
+" let g:windowswap_map_keys = 0 "prevent default bindings
+" nnoremap <silent> <leader>yw :call WindowSwap#MarkWindowSwap()<CR>
+Plugin 'wesQ3/vim-windowswap'
 " }}}
 
 " Fuzzy Finder: {{{

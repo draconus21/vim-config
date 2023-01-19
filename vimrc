@@ -49,8 +49,9 @@ Plugin 'xuyuanp/nerdtree-git-plugin'
 
 let NERDTreeIgnore = ['\.pyc$', 'CmakeBuild', 'venv', 'egg', 'egg-info', 'dist', '\.pb$', '\.pbtxt$', '\.bin$', '\.raw$', '__pycache__']
 
-" clone NERDTree on exit (to ensure that vim-workspace can save and load sessions properly'
+" close NERDTree on exit (to ensure that vim-workspace can save and load sessions properly'
 autocmd VimLeave * NERDTreeClose
+
 if !has("gui_running") " skip save session when using gvim
   autocmd VimLeave * mksession
 endif
@@ -100,9 +101,10 @@ autocmd FileType json,c,cpp,python,rst,sh EnableStripWhitespaceOnSave
 " CODE SYNTAX: {{{
 set background=dark
 
-Plugin 'psf/black'
+Plugin 'psf/black', { 'branch': 'stable' }
 " run Black on save
 autocmd BufWritePre *.py execute ':Black'
+let g:black_exclude = 'airyPyOptics'
 " }}}
 
 " POWERLINE: {{{
@@ -121,6 +123,11 @@ set laststatus=2 " Always show status line
 Plugin 'https://github.com/mbbill/undotree.git'
 let g:undotree_WindowLayout = 4
 nnoremap ,u :UndotreeToggle<CR>
+" persistent undos
+if has('persistent_undo')
+  set undodir=$HOME/.vim/.undo
+  set undofile
+endif
 " }}}
 
 " Gutentags: {{{
@@ -132,7 +139,7 @@ let g:gutentags_generate_on_write = 1
 let g:gutentags_generate_on_missing = 1
 let g:gutentags_generate_on_new = 1
 let g:gutentags_generate_on_empty_buffer = 0
-let g:gutentags_cache_dir = '~/.tags/'
+let g:gutentags_cache_dir = '~/.vim/.tags/'
 let g:gutentags_ctags_exclude = [
   \ '*.git',
   \ '*/third_parties/*',
@@ -191,6 +198,10 @@ let g:tex_flavor = 'latex'
 
 " SimpylFold: {{{
 Plugin 'tmhedberg/SimpylFold'
+" }}}
+
+" vim-yaml-fold: {{{
+Plugin 'https://github.com/pedrohdz/vim-yaml-folds'
 " }}}
 
 " Vim log highlighting: {{{
@@ -310,7 +321,7 @@ set cursorline  " highlight/underline current line
 set showmatch   " highlight matching brackets
 set lazyredraw  " redraw only when we need to
 "set tw=99       " width of document
-set colorcolumn=107
+set colorcolumn=120
 
 set backspace=indent,eol,start
 set splitbelow

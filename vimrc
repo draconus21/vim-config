@@ -141,6 +141,7 @@ let g:gutentags_generate_on_new = 1
 let g:gutentags_generate_on_empty_buffer = 0
 let g:gutentags_cache_dir = '~/.vim/.tags/'
 let g:gutentags_ctags_exclude = [
+  \ '/media/*',
   \ '*.git',
   \ '*/third_parties/*',
   \ '*/resources/*',

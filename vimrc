@@ -47,7 +47,7 @@ Plugin 'ctrlpvim/ctrlp.vim'
 Plugin 'preservim/nerdtree'
 Plugin 'xuyuanp/nerdtree-git-plugin'
 
-let NERDTreeIgnore = ['\.pyc$', 'CmakeBuild', 'venv', 'egg', 'egg-info', 'dist', '\.pb$', '\.pbtxt$', '\.bin$', '\.raw$', '__pycache__']
+let NERDTreeIgnore = ['\.pyc$', 'CmakeBuild', '.env*', 'egg', 'egg-info', 'dist', '\.pb$', '\.pbtxt$', '\.bin$', '\.raw$', '__pycache__']
 
 " close NERDTree on exit (to ensure that vim-workspace can save and load sessions properly'
 autocmd VimLeave * NERDTreeClose

@@ -47,12 +47,13 @@ Plugin 'ctrlpvim/ctrlp.vim'
 Plugin 'preservim/nerdtree'
 Plugin 'xuyuanp/nerdtree-git-plugin'
 
-let NERDTreeIgnore = ['\.pyc$', 'CmakeBuild', 'venv', 'egg', 'egg-info', 'dist', '\.pb$', '\.pbtxt$', '\.bin$', '\.raw$', '__pycache__']
+let NERDTreeIgnore = ['\.pyc$', 'CmakeBuild', 'venv', 'egg', 'egg-info', 'dist', '\.pb$', '\.pbtxt$', '\.bin$', '\.raw$', '__pycache__', '\.so', '\.so\.*', '\.a', '\.lib']
 
 " close NERDTree on exit (to ensure that vim-workspace can save and load sessions properly'
 autocmd VimLeave * NERDTreeClose
 
-if !has("gui_running") " skip save session when using gvim
+" save session when opening a directory with `vim` from cmd-line
+if !has("gui_running") && isdirectory(argv()[0])
   autocmd VimLeave * mksession
 endif
 

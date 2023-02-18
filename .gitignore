@@ -1,8 +1,9 @@
-figures/
-aux-figs/
+logs/
+data/
+install/
+testfiles/
 results/
 run-configs/
-test.sh
 
 ###########
 ### VIM ###
@@ -22,19 +23,17 @@ Session.vim
 # auto-generated tag files
 .tags
 
+# C extensions
+*.so
+
 ##############
 ### PYTHON ###
 ##############
 
-# Byte-compiled / optimized / DLL files
+# Distribution / packaging
 __pycache__/
 *.py[cod]
 *$py.class
-
-# C extensions
-*.so
-
-# Distribution / packaging
 .Python
 env/
 build/
@@ -52,6 +51,11 @@ wheels/
 *.egg-info/
 .installed.cfg
 *.egg
+
+# python venv
+.env
+.python-version
+
 
 # PyInstaller
 #  Usually these files are written by a python script from a template
@@ -74,21 +78,6 @@ coverage.xml
 *,cover
 .hypothesis/
 
-# Translations
-*.mo
-*.pot
-
-# Django stuff:
-*.log
-local_settings.py
-
-# Flask stuff:
-instance/
-.webassets-cache
-
-# Scrapy stuff:
-.scrapy
-
 # Sphinx documentation
 docs/_build/
 
@@ -98,22 +87,7 @@ target/
 # Jupyter Notebook
 .ipynb_checkpoints
 
-# pyenv
-.python-version
 
-# celery beat schedule file
-celerybeat-schedule
-
-# dotenv
-.env
-
-# virtualenv
-.venv/
-venv/
-ENV/
-
-# Spyder project settings
-.spyderproject
-
-# Rope project settings
-.ropeproject
+# vs-code
+.vscode/
+*.code-workspace

@@ -52,7 +52,37 @@ let NERDTreeIgnore = ['\.pyc$', 'CmakeBuild', '.env*', 'egg', 'egg-info', 'dist'
 " close NERDTree on exit (to ensure that vim-workspace can save and load sessions properly'
 autocmd VimLeave * NERDTreeClose
 
-if !has("gui_running") " skip save session when using gvim
+let s:cwd = getcwd()
+let s:session_skip_regex = ["^".$HOME."$", "^/media/*"]
+" any subdir under user home
+let s:session_create_regex = ["^".$HOME."\\\(/\\\(\\h\\\)\\\+\\\(\\d\\\)*\\\)\\\+$"]
+
+" do not mksession if using vim gui nor when opening a file
+let s:mksess = !has("gui_running") && isdirectory(argv()[0])
+
+" verify that cwd matches something in g:session_create_regex
+if s:mksess
+  for regex in s:session_create_regex
+    if match(s:cwd, regex) >= 0
+      let s:mksess = 1
+      break
+    endif
+  endfor
+endif
+
+
+" make sure that cwd does not match anythingin g:session_skip_regex
+if s:mksess
+  for regex in s:session_skip_regex
+    if match(s:cwd, regex) >= 0
+      let s:mksess = 0
+      break
+    endif
+  endfor
+endif
+
+if s:mksess
+ " save session only when not using gvim and not calling vim from
   autocmd VimLeave * mksession
 endif
 
